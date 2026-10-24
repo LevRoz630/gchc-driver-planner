@@ -340,7 +340,7 @@ services and lives within {net.pickup_reach_km * MILES_PER_KM:.0f} miles of the 
 nobody fits, that day's journeys go by taxi at Glasgow fares. The extra cost is the taxi fares minus the mileage
 the charity no longer pays, or the extra miles a stand-in drives.
 
-Costs are shown a month at a time because replacing a driver takes about a month: roughly two weeks to find
+Costs are shown a month at a time because we assume replacing a driver takes about a month: roughly two weeks to find
 someone and two weeks to train them. So a month's extra cost is about what one driver stopping costs.
 
 Things this leaves out:
@@ -372,9 +372,9 @@ def page_rota():
     rota.render(net)
 
 def page_new_department():
-    estimates = {"central": "Middle (our best guess)", "low": "Lower", "high": "Higher"}
-    scenario = st.radio("How busy will patient transport be?", list(estimates), format_func=estimates.get,
-                        horizontal=True)
+    # sized on one assumption about which departments use patient transport today (the RHC medical departments);
+    # the low and high cases stay in planner.py and the expansion notebook
+    scenario = "central"
     with st.spinner("Working out each department…"):
         table = remembered(sig, "expansion", scenario, net, drop)
     show_served = st.checkbox("Also list maternity units the charity already serves", value=False)
@@ -393,11 +393,6 @@ def page_new_department():
     c = st.columns(len(split))
     for col, service, n in zip(c, split["service"], parts):
         col.metric(SERVICE_NAMES.get(service, service), f"{n} a week")
-    pat = split[split["service"] == "PAT"]
-    if len(pat):
-        p = pat.iloc[0]
-        st.markdown(f"Patient transport could be anywhere from {up(p['journeys_pw_low'])} to "
-                    f"{up(p['journeys_pw_high'])} journeys a week.")
 
     need = up(r["drivers_needed"])
     st.markdown(f"**Drivers needed:** up to {need} driver{'s' if need != 1 else ''}' worth of time, made up of:")
@@ -434,6 +429,9 @@ def page_new_department():
 We take how many journeys the charity does today for each patient (patient transport, respiratory) or each birth
 (milk bank, breast pumps, neonatal), and multiply by the department's patients or the unit's births from Public
 Health Scotland ({pub['constants']['source_year']}). Areas where more families have no car get more journeys.
+
+Patient transport assumes the departments that use it today are the children's hospital's medical departments.
+The charity can confirm which departments they are; that changes one number in the model.
 
 A volunteer does about {round(net.journeys_per_day)} journeys on a driving day. The extra days are filled first by
 trained drivers with spare days who live within {net.hospital_reach_km * MILES_PER_KM:.0f} miles of the hospital, then by nearby
