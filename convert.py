@@ -5,6 +5,7 @@ text, not by file or sheet name. Runs in the browser (stlite): pandas, numpy and
 import datetime as dt
 import io
 import re
+from pathlib import Path
 
 import pandas as pd
 
@@ -368,8 +369,20 @@ def hospital_table(df):
     return h.dropna()
 
 
+def read_csv(blob):
+    """A CSV as Excel saves it (UTF-8 or Windows encoding, commas or semicolons), every cell as text, no header row
+    assumed, so it can be searched for its headings like a workbook tab. None if it can't be read."""
+    for enc in ("utf-8-sig", "cp1252"):
+        try:
+            return pd.read_csv(io.BytesIO(blob), header=None, dtype=str, sep=None, engine="python", encoding=enc)
+        except Exception:
+            continue
+    return None
+
+
 def from_workbooks(files, year=None):
-    """files: (filename, bytes) pairs, .xlsx workbooks plus an optional hospital_locations .csv.
+    """files: (filename, bytes) pairs: .xlsx workbooks, or their weekly tabs saved as .csv, plus an optional
+    hospital_locations .csv.
     year: the year of the weekly tabs; None tries this year then last.
     Returns (tables, notes): drivers, availability, journeys, and mileage if given; notes on what was read or skipped.
     Raises ConvertError if journeys, availability or driver details are missing."""
@@ -382,24 +395,38 @@ def read_workbooks(files, year=None):
     notes, skipped = [], []
     hospitals = pd.DataFrame(HOSPITALS, columns=["location_id", "name", "postcode"])[["location_id", "postcode"]]
     sheets = []  # (where, tab, kind, df)
+    planner_layout = False
     for fname, blob in files:
         if str(fname).lower().endswith(".csv"):
-            try:
-                h = hospital_table(pd.read_csv(io.BytesIO(blob)))
-            except Exception:
-                h = None
-            if h is None:
-                skipped.append(f"Skipped {fname}: a CSV file that isn't a hospital list (location_id, postcode).")
+            # a CSV is one tab saved on its own: a journeys, availability or mileage sheet, or a hospital list
+            raw = read_csv(blob)
+            if raw is None:
+                skipped.append(f"Skipped {fname}: it couldn't be opened. Save it from Excel as 'CSV UTF-8' or as .xlsx.")
+                continue
+            body = raw.dropna(how="all").dropna(axis=1, how="all").reset_index(drop=True)
+            body.columns = range(body.shape[1])
+            first = {str(c).strip().lower() for c in body.iloc[0]} if len(body) else set()
+            if first & {"journey_id", "week_start", "driver_type"} or any(c.startswith("role_") for c in first):
+                planner_layout = True   # the planner's own CSV layout, which goes in the other upload box
+                skipped.append(f"Skipped {fname}: a CSV in the planner's layout, not one of the charity's spreadsheets.")
+                continue
+            if len(body) and kind(body):
+                book = {Path(fname).stem: raw}
             else:
-                hospitals = pd.concat([h, hospitals]).drop_duplicates("postcode")
-                notes.append(f"Hospitals: {len(h)} from {fname}, plus the built-in list.")
-            continue
-        try:
-            book = pd.read_excel(io.BytesIO(blob), sheet_name=None, header=None)
-        except Exception:
-            skipped.append(f"Skipped {fname}: it couldn't be opened as an Excel workbook. Save it as .xlsx and "
-                           "upload it again.")
-            continue
+                h = hospital_table(raw.iloc[1:].set_axis(raw.iloc[0].astype(str).str.strip(), axis=1)) if len(raw) > 1 else None
+                if h is not None:
+                    hospitals = pd.concat([h, hospitals]).drop_duplicates("postcode")
+                    notes.append(f"Hospitals: {len(h)} from {fname}, plus the built-in list.")
+                else:
+                    skipped.append(f"Skipped {fname}: not a journeys, availability, mileage or hospital table.")
+                continue
+        else:
+            try:
+                book = pd.read_excel(io.BytesIO(blob), sheet_name=None, header=None)
+            except Exception:
+                skipped.append(f"Skipped {fname}: it couldn't be opened as an Excel workbook. Save it as .xlsx and "
+                               "upload it again.")
+                continue
         for tab, df in book.items():
             df = df.dropna(how="all").dropna(axis=1, how="all").reset_index(drop=True)
             df.columns = range(df.shape[1])
@@ -469,8 +496,12 @@ def read_workbooks(files, year=None):
                        "columns, as in the Drivers Info workbook)")
     if missing:
         looked = "; ".join(skipped) if not sheets and skipped else " ".join(s for s in skipped if "couldn't be opened" in s)
-        raise ConvertError("Couldn't find " + " or ".join(missing) + ". Upload the workbook as the charity keeps it, "
-                           "with its header row." + (f" ({looked})" if looked else ""))
+        if planner_layout:   # the planner's own CSVs, added in the box for the charity's spreadsheets
+            raise ConvertError("These look like CSV files in the planner's layout (drivers.csv, availability.csv, "
+                               "journeys.csv). Choose \"Three CSV files in the planner's layout\" in the panel on the "
+                               "left and add them there.")
+        raise ConvertError("Couldn't find " + " or ".join(missing) + ". Upload the workbooks as the charity keeps them "
+                           "(.xlsx, or each weekly tab saved as CSV), with their header rows." + (f" ({looked})" if looked else ""))
 
     jw = sorted(weeks)
     journeys = tidy_journeys(pd.concat([weeks[w][1] for w in jw], ignore_index=True), hospitals)
