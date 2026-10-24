@@ -1,0 +1,46 @@
+candidate,label,location,specialty,kind,health_board,base,lat,lon,no_car,served_today
+0,Ayrshire Central Hospital - Paediatrics,A103H,AF,department,Ayrshire & Arran,2254,55.63505571,-4.67610666,0.3223551218962563,False
+1,University Hospital Crosshouse - Paediatrics,A111H,AF,department,Ayrshire & Arran,2431,55.61393857,-4.53938873,0.2918364451137468,True
+2,University Hospital Crosshouse - Paediatric Surgery,A111H,CA,department,Ayrshire & Arran,373,55.61393857,-4.53938873,0.30712839681044635,True
+3,University Hospital Ayr - Paediatrics,A210H,AF,department,Ayrshire & Arran,1279,55.43033174,-4.59553796,0.3052291427387573,False
+4,East Ayrshire Community Hospital - Paediatrics,A215H,AF,department,Ayrshire & Arran,325,55.45147076,-4.2712645,0.2972229169529184,False
+5,Girvan Community Hospital - Paediatrics,A216H,AF,department,Ayrshire & Arran,131,55.24830772,-4.84697516,0.2928461519427704,False
+6,Stirling Community Hospital - Paediatrics,V201H,AF,department,Forth Valley,1124,56.10680036,-3.93589294,0.2570138473281058,False
+7,Clackmannanshire Community Healthcare Centre - Paediatrics,V216H,AF,department,Forth Valley,130,56.12468716,-3.78354731,0.27740928691442346,False
+8,Forth Valley Royal Hospital - Paediatrics,V217H,AF,department,Forth Valley,4695,56.02511541,-3.84800224,0.2623920899744038,False
+9,Forth Valley Royal Hospital - Paediatric Surgery,V217H,CA,department,Forth Valley,418,56.02511541,-3.84800224,0.26603804402509046,False
+10,Vale of Leven General Hospital - Paediatrics,C206H,AF,department,Greater Glasgow & Clyde,396,55.99307916,-4.59180755,0.3121020206596183,False
+11,Inverclyde Royal Hospital - Paediatrics,C313H,AF,department,Greater Glasgow & Clyde,553,55.94398118,-4.80925144,0.3836600021764567,False
+12,The Princess Royal Maternity Unit - Paediatrics,G108H,AF,department,Greater Glasgow & Clyde,683,55.86523712,-4.23223211,0.4817201434566239,False
+13,Royal Hospital for Children - Infectious Diseases,G513H,A6,department,Greater Glasgow & Clyde,196,55.86264079,-4.33810356,0.39813604257938273,False
+14,Royal Hospital for Children - Dermatology,G513H,A7,department,Greater Glasgow & Clyde,2413,55.86264079,-4.33810356,0.39813604257938273,False
+15,Royal Hospital for Children - Endocrinology & Diabetes,G513H,A8,department,Greater Glasgow & Clyde,2271,55.86264079,-4.33810356,0.39813604257938273,False
+16,Royal Hospital for Children - Gastroenterology,G513H,A9,department,Greater Glasgow & Clyde,1581,55.86264079,-4.33810356,0.39813604257938273,False
+17,Royal Hospital for Children - Medical Oncology,G513H,AD,department,Greater Glasgow & Clyde,186,55.86264079,-4.33810356,0.39813604257938273,False
+18,Royal Hospital for Children - Paediatrics,G513H,AF,department,Greater Glasgow & Clyde,6605,55.86264079,-4.33810356,0.39813604257938273,False
+19,Royal Hospital for Children - Renal Medicine,G513H,AG,department,Greater Glasgow & Clyde,889,55.86264079,-4.33810356,0.39813604257938273,False
+20,Royal Hospital for Children - Neurology,G513H,AH,department,Greater Glasgow & Clyde,2682,55.86264079,-4.33810356,0.39813604257938273,False
+21,Royal Hospital for Children - Rheumatology,G513H,AR,department,Greater Glasgow & Clyde,815,55.86264079,-4.33810356,0.39813604257938273,False
+22,Royal Hospital for Children - Allergy,G513H,AW,department,Greater Glasgow & Clyde,1066,55.86264079,-4.33810356,0.39813604257938273,False
+23,Royal Hospital for Children - General Surgery,G513H,C1,department,Greater Glasgow & Clyde,670,55.86264079,-4.33810356,0.39813604257938273,False
+24,Royal Hospital for Children - Anaesthetics,G513H,C3,department,Greater Glasgow & Clyde,245,55.86264079,-4.33810356,0.39813604257938273,False
+25,"Royal Hospital for Children - Ear, Nose & Throat (ENT)",G513H,C5,department,Greater Glasgow & Clyde,6938,55.86264079,-4.33810356,0.39813604257938273,False
+26,Royal Hospital for Children - Neurosurgery,G513H,C6,department,Greater Glasgow & Clyde,747,55.86264079,-4.33810356,0.39813604257938273,False
+27,Royal Hospital for Children - Ophthalmology,G513H,C7,department,Greater Glasgow & Clyde,2402,55.86264079,-4.33810356,0.39813604257938273,False
+28,Royal Hospital for Children - Trauma and Orthopaedic Surgery,G513H,C8,department,Greater Glasgow & Clyde,5159,55.86264079,-4.33810356,0.39813604257938273,False
+29,Royal Hospital for Children - Plastic Surgery,G513H,C9,department,Greater Glasgow & Clyde,2302,55.86264079,-4.33810356,0.39813604257938273,False
+30,Royal Hospital for Children - Paediatric Surgery,G513H,CA,department,Greater Glasgow & Clyde,2999,55.86264079,-4.33810356,0.39813604257938273,False
+31,Royal Hospital for Children - Urology,G513H,CB,department,Greater Glasgow & Clyde,1354,55.86264079,-4.33810356,0.39813604257938273,False
+32,Royal Hospital for Children - Paediatric Dentistry,G513H,D8,department,Greater Glasgow & Clyde,787,55.86264079,-4.33810356,0.39813604257938273,False
+33,Royal Hospital for Children - Haematology,G513H,J4,department,Greater Glasgow & Clyde,1421,55.86264079,-4.33810356,0.39813604257938273,False
+34,Royal Hospital for Children - Immunology,G513H,J5,department,Greater Glasgow & Clyde,145,55.86264079,-4.33810356,0.39813604257938273,False
+35,University Hospital Monklands - Paediatrics,L106H,AF,department,Lanarkshire,1190,55.86587817,-3.99958755,0.3107997201521372,False
+36,University Hospital Hairmyres - Paediatrics,L302H,AF,department,Lanarkshire,983,55.75982077,-4.22196347,0.32469378506583385,False
+37,University Hospital Wishaw - Paediatrics,L308H,AF,department,Lanarkshire,4445,55.77369289,-3.94173827,0.29688528605120273,False
+38,University Hospital Wishaw - Paediatric Surgery,L308H,CA,department,Lanarkshire,399,55.77369289,-3.94173827,0.3099588867974183,False
+39,University Hospital Crosshouse - maternity unit,A111H,,maternity unit,Ayrshire & Arran,2661,55.61393857,-4.53938873,0.24050000693763074,True
+40,Royal Alexandra Hospital - maternity unit,C418H,,maternity unit,Greater Glasgow & Clyde,3191,55.83520752,-4.4377897,0.25587482738961737,True
+41,The Princess Royal Maternity Unit - maternity unit,G108H,,maternity unit,Greater Glasgow & Clyde,4830,55.86523712,-4.23223211,0.3287652316774153,True
+42,Queen Elizabeth University Hospital - maternity unit,G405H,,maternity unit,Greater Glasgow & Clyde,5108,55.86264079,-4.33810356,0.3441594482236508,True
+43,University Hospital Wishaw - maternity unit,L308H,,maternity unit,Lanarkshire,3986,55.77369289,-3.94173827,0.22374617990404033,False
+44,Forth Valley Royal Hospital - maternity unit,V217H,,maternity unit,Forth Valley,2783,56.02511541,-3.84800224,0.20070397343326657,False

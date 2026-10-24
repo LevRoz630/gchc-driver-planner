@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Driver planner</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.css">
+</head>
+<body>
+<div id="root"></div>
+<script type="module">
+import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.js";
+mount({
+  entrypoint: "app.py",
+  requirements: ["jinja2", "pydeck", "openpyxl"],
+  // the charity's colours: deep purple accent (12.5:1 with white), dark grey text, lavender panels (11:1)
+  streamlitConfig: { "client.toolbarMode": "viewer", "theme.base": "light", "theme.primaryColor": "#560C70",
+                     "theme.textColor": "#333333", "theme.secondaryBackgroundColor": "#F3EDF8" },
+  files: {
+  "app.py": {
+    "url": "./app.py?v=295f5803"
+  },
+  "ui.py": {
+    "url": "./ui.py?v=98ee56f6"
+  },
+  "planner.py": {
+    "url": "./planner.py?v=bbf7fcb9"
+  },
+  "checks.py": {
+    "url": "./checks.py?v=3ac7701d"
+  },
+  "convert.py": {
+    "url": "./convert.py?v=34ddb511"
+  },
+  "overview.py": {
+    "url": "./overview.py?v=425efc7a"
+  },
+  "mileage.py": {
+    "url": "./mileage.py?v=ed388958"
+  },
+  "match.py": {
+    "url": "./match.py?v=f392f06b"
+  },
+  "rota.py": {
+    "url": "./rota.py?v=2b083b83"
+  },
+  "public_data/candidates.csv": {
+    "url": "./public_data/candidates.csv?v=aca2ac4a"
+  },
+  "public_data/catchment_districts.csv": {
+    "url": "./public_data/catchment_districts.csv?v=b1eec252"
+  },
+  "public_data/constants.json": {
+    "url": "./public_data/constants.json?v=dee7bc37"
+  },
+  "public_data/postcodes.csv": {
+    "url": "./public_data/postcodes.csv?v=0e564ce3"
+  },
+  "public_data/health_boards.json": {
+    "url": "./public_data/health_boards.json?v=30ef0fda"
+  }
+},
+}, document.getElementById("root"));
+</script>
+</body>
+</html>

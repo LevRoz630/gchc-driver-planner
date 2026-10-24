@@ -1,0 +1,14 @@
+{
+ "source_year": "2025/26",
+ "pat_base": {
+  "low": 40359.0,
+  "central": 17134.0,
+  "high": 8876.0
+ },
+ "resp_base": 4512.0,
+ "resp_share": 0.05156222899477192,
+ "births_today": 15814.0,
+ "today_no_car": 0.39813604257938273,
+ "rhc_location": "G513H",
+ "crosshouse_location": "A111H"
+}
